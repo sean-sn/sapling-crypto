@@ -353,7 +353,6 @@ mod test {
             assert!(cs.is_satisfied());
 
             let mut s = hash_result
-                .as_ref()
                 .iter()
                 .flat_map(|&byte| (0..8).rev().map(move |i| (byte >> i) & 1u8 == 1u8));
 

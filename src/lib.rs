@@ -5,6 +5,9 @@ extern crate byteorder;
 extern crate ff;
 extern crate paired;
 extern crate rand;
+#[macro_use]
+extern crate lazy_static;
+extern crate rayon;
 
 #[cfg(test)]
 #[macro_use]

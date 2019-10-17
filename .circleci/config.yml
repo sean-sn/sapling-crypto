@@ -27,6 +27,8 @@ commands:
       - run:
           name: Test (<< parameters.target >>)
           command: TARGET=<< parameters.target >> cargo test
+          environment:
+            RUST_BACKTRACE: 1
           no_output_timeout: 15m
 
 jobs:
