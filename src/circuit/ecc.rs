@@ -662,13 +662,13 @@ impl<E: JubjubEngine> MontgomeryPoint<E> {
 #[cfg(test)]
 mod test {
     use super::{fixed_base_multiplication, EdwardsPoint, MontgomeryPoint};
+    use crate::jubjub::fs::Fs;
+    use crate::jubjub::{edwards, montgomery, FixedGenerators, JubjubBls12, JubjubParams};
     use bellperson::gadgets::boolean::{AllocatedBit, Boolean};
     use bellperson::gadgets::num::AllocatedNum;
     use bellperson::gadgets::test::*;
     use bellperson::ConstraintSystem;
     use ff::{BitIterator, Field, PrimeField};
-    use crate::jubjub::fs::Fs;
-    use crate::jubjub::{edwards, montgomery, FixedGenerators, JubjubBls12, JubjubParams};
     use paired::bls12_381::{Bls12, Fr};
     use rand::Rng;
     use rand_core::SeedableRng;
