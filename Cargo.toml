@@ -8,6 +8,7 @@ homepage = "https://github.com/filecoin-project/sapling-crypto"
 license = "MIT/Apache-2.0"
 repository = "https://github.com/filecoin-project/sapling-crypto"
 version = "0.1.2"
+edition = "2018"
 
 [dependencies]
 rand_core = "0.5"

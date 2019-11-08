@@ -11,7 +11,7 @@ use bellperson::gadgets::{
     Assignment,
 };
 
-use jubjub::{edwards, FixedGenerators, JubjubEngine, JubjubParams};
+use crate::jubjub::{edwards, FixedGenerators, JubjubEngine, JubjubParams};
 
 #[derive(Clone)]
 pub struct EdwardsPoint<E: Engine> {
@@ -667,8 +667,8 @@ mod test {
     use bellperson::gadgets::test::*;
     use bellperson::ConstraintSystem;
     use ff::{BitIterator, Field, PrimeField};
-    use jubjub::fs::Fs;
-    use jubjub::{edwards, montgomery, FixedGenerators, JubjubBls12, JubjubParams};
+    use crate::jubjub::fs::Fs;
+    use crate::jubjub::{edwards, montgomery, FixedGenerators, JubjubBls12, JubjubParams};
     use paired::bls12_381::{Bls12, Fr};
     use rand::Rng;
     use rand_core::SeedableRng;

@@ -5,8 +5,8 @@ use ff::{Field, PrimeField, PrimeFieldRepr};
 use rand_core::RngCore;
 use std::io::{self, Read, Write};
 
-use jubjub::{edwards::Point, FixedGenerators, JubjubEngine, JubjubParams, Unknown};
-use util::hash_to_scalar;
+use crate::jubjub::{edwards::Point, FixedGenerators, JubjubEngine, JubjubParams, Unknown};
+use crate::util::hash_to_scalar;
 
 fn read_scalar<E: JubjubEngine, R: Read>(reader: R) -> io::Result<E::Fs> {
     let mut s_repr = <E::Fs as PrimeField>::Repr::default();
@@ -211,7 +211,7 @@ mod tests {
     use paired::bls12_381::Bls12;
     use rand::thread_rng;
 
-    use jubjub::{edwards, fs::Fs, JubjubBls12};
+    use crate::jubjub::{edwards, fs::Fs, JubjubBls12};
 
     use super::*;
 

@@ -2,8 +2,8 @@ use bellperson::gadgets::{boolean::Boolean, lookup::*};
 use bellperson::{ConstraintSystem, SynthesisError};
 
 use super::ecc::{EdwardsPoint, MontgomeryPoint};
-use jubjub::*;
-pub use pedersen_hash::Personalization;
+use crate::jubjub::*;
+pub use crate::pedersen_hash::Personalization;
 
 impl Personalization {
     fn get_constant_bools(&self) -> Vec<Boolean> {
@@ -189,7 +189,7 @@ mod test {
 
                 assert!(cs.is_satisfied());
 
-                let expected = ::pedersen_hash::pedersen_hash::<Bls12, _>(
+                let expected = crate::pedersen_hash::pedersen_hash::<Bls12, _>(
                     Personalization::MerkleTree(1),
                     input.clone().into_iter(),
                     params,
@@ -200,7 +200,7 @@ mod test {
                 assert_eq!(res.get_y().get_value().unwrap(), expected.1);
 
                 // Test against the output of a different personalization
-                let unexpected = ::pedersen_hash::pedersen_hash::<Bls12, _>(
+                let unexpected = crate::pedersen_hash::pedersen_hash::<Bls12, _>(
                     Personalization::MerkleTree(0),
                     input.into_iter(),
                     params,
@@ -248,7 +248,7 @@ mod test {
 
                 assert!(cs.is_satisfied());
 
-                let expected = ::pedersen_hash::pedersen_hash::<Bls12, _>(
+                let expected = crate::pedersen_hash::pedersen_hash::<Bls12, _>(
                     Personalization::None,
                     input.clone().into_iter(),
                     params,
