@@ -1,8 +1,7 @@
-use super::boolean::Boolean;
+use bellperson::gadgets::{boolean::Boolean, lookup::*};
+use bellperson::{ConstraintSystem, SynthesisError};
+
 use super::ecc::{EdwardsPoint, MontgomeryPoint};
-use super::lookup::*;
-use super::*;
-use bellperson::ConstraintSystem;
 use jubjub::*;
 pub use pedersen_hash::Personalization;
 
@@ -112,15 +111,22 @@ where
 #[cfg(test)]
 mod test {
     use super::*;
-    use circuit::boolean::{AllocatedBit, Boolean};
-    use circuit::test::*;
+    use bellperson::gadgets::{
+        boolean::{AllocatedBit, Boolean},
+        test::*,
+    };
     use ff::PrimeField;
     use paired::bls12_381::{Bls12, Fr};
-    use rand::{Rng, SeedableRng, XorShiftRng};
+    use rand::Rng;
+    use rand_core::SeedableRng;
+    use rand_xorshift::XorShiftRng;
 
     #[test]
     fn test_pedersen_hash_constraints() {
-        let mut rng = XorShiftRng::from_seed([0x3dbe6259, 0x8d313d76, 0x3237db17, 0xe5bc0654]);
+        let mut rng = XorShiftRng::from_seed([
+            0x59, 0x62, 0xbe, 0x5d, 0x76, 0x3d, 0x31, 0x8d, 0x17, 0xdb, 0x37, 0x32, 0x54, 0x06,
+            0xbc, 0xe5,
+        ]);
         let params = &JubjubBls12::new_with_window_size(16);
         let mut cs = TestConstraintSystem::<Bls12>::new();
 
@@ -150,7 +156,10 @@ mod test {
 
     #[test]
     fn test_pedersen_hash() {
-        let mut rng = XorShiftRng::from_seed([0x3dbe6259, 0x8d313d76, 0x3237db17, 0xe5bc0654]);
+        let mut rng = XorShiftRng::from_seed([
+            0x59, 0x62, 0xbe, 0x5d, 0x76, 0x3d, 0x31, 0x8d, 0x17, 0xdb, 0x37, 0x32, 0x54, 0x06,
+            0xbc, 0xe5,
+        ]);
         let params = &JubjubBls12::new_with_window_size(16);
 
         for length in 0..751 {
@@ -206,12 +215,15 @@ mod test {
 
     #[test]
     fn test_pedersen_hash_none_personalization() {
-        let mut rng = XorShiftRng::from_seed([0x3dbe6259, 0x8d313d76, 0x3237db17, 0xe5bc0654]);
+        let mut rng = XorShiftRng::from_seed([
+            0x59, 0x62, 0xbe, 0x5d, 0x76, 0x3d, 0x31, 0x8d, 0x17, 0xdb, 0x37, 0x32, 0x54, 0x06,
+            0xbc, 0xe5,
+        ]);
         let params = &JubjubBls12::new();
 
         for length in 1..751 {
             for _ in 0..5 {
-                let mut input: Vec<bool> = (0..length).map(|_| rng.gen()).collect();
+                let input: Vec<bool> = (0..length).map(|_| rng.gen()).collect();
 
                 let mut cs = TestConstraintSystem::<Bls12>::new();
 
@@ -251,7 +263,10 @@ mod test {
 
     #[test]
     fn test_pedersen_hash_constraints_none_personalization() {
-        let mut rng = XorShiftRng::from_seed([0x3dbe6259, 0x8d313d76, 0x3237db17, 0xe5bc0654]);
+        let mut rng = XorShiftRng::from_seed([
+            0x59, 0x62, 0xbe, 0x5d, 0x76, 0x3d, 0x31, 0x8d, 0x17, 0xdb, 0x37, 0x32, 0x54, 0x06,
+            0xbc, 0xe5,
+        ]);
         let params = &JubjubBls12::new();
         let mut cs = TestConstraintSystem::<Bls12>::new();
 

@@ -5,6 +5,7 @@ extern crate byteorder;
 extern crate ff;
 extern crate paired;
 extern crate rand;
+extern crate rand_core;
 
 #[cfg(test)]
 #[macro_use]
@@ -12,6 +13,9 @@ extern crate hex_literal;
 
 #[cfg(test)]
 extern crate crypto;
+
+#[cfg(test)]
+extern crate rand_xorshift;
 
 #[cfg(test)]
 extern crate digest;
