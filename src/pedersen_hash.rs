@@ -210,3 +210,24 @@ where
 
     result
 }
+
+#[cfg(test)]
+mod test {
+    use paired::bls12_381::Bls12;
+    use rand::{Rng, SeedableRng, XorShiftRng};
+    use super::*;
+
+    #[test]
+    fn pedersen_hash_vs_precomp() {
+        let params = JubjubBls12::new_with_window_size(16);
+        let rng = &mut XorShiftRng::from_seed([0x3dbe6259, 0x8d313d76, 0x3237db17, 0xe5bc0654]);
+        let personalization = Personalization::MerkleTree(31);
+
+        for _ in 0..500000 {
+           let bits = (0..510).map(|_| rng.gen::<bool>()).collect::<Vec<_>>();
+           let hash_orig = pedersen_hash::<Bls12, _>(personalization, bits.clone(), &params).into_xy();
+           let hash_new  = pedersen_hash_with_precomp::<Bls12, _>(personalization, bits.clone(), &params).into_xy();
+           assert_eq!(hash_orig, hash_new);
+        }
+    }
+}
