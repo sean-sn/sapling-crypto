@@ -17,6 +17,7 @@ paired = { version = "0.15", features = ["expose-arith"] }
 bellperson = "0.3"
 blake2b_simd = "0.5"
 blake2s_simd = "0.5"
+twisted_edwards_jubjub_add = { version = "0.1.0", path = "../sn-crypto/rust/twisted_edwards_jubjub_add" }
 
 [dev-dependencies]
 digest = "0.8"
